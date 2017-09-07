@@ -8,4 +8,10 @@ app.get('/', (req, res)=>{
     res.send();
 })
 
-app.listen(port);
+if(!require.main.loaded){
+  var port = process.env.PORT || 8080;
+  app.listen(port, function(){});
+}
+
+
+module.exports = app;
