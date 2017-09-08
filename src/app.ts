@@ -1,4 +1,5 @@
 
+$(document).ready(()=> $('select').material_select());
 let getObj= (id) => document.getElementById(id);
 const speed = <HTMLInputElement>getObj('speedSlide');
 const pitch = <HTMLInputElement>getObj('pitchSlide'); 
@@ -6,6 +7,7 @@ const voiceOptions = <HTMLSelectElement>getObj('voiceOptions');
 const speechText = <HTMLInputElement>getObj('speakText');
 const speechButton = <HTMLInputElement>getObj('speakButton');
 const synth = window.speechSynthesis;
+const isChrome = (window.chrome && window.chrome.webstore);
 
 let populateList = () =>  {
     let appendList = () =>{
@@ -17,7 +19,7 @@ let populateList = () =>  {
             voiceOptions.appendChild(option);
         }
     }
-    if (synth.onvoiceschanged) {
+    if (isChrome) {
         const getVoices = new Promise(done=> synth.onvoiceschanged = done);
         getVoices.then(() => appendList());
     } else {
@@ -28,6 +30,7 @@ let populateList = () =>  {
 populateList();
 
 let handleSpeak = () :void => {
+    synth.cancel();
     let voices = synth.getVoices();
     const selectedOption = voiceOptions.selectedOptions[0].getAttribute('data-name');
     let utter = new SpeechSynthesisUtterance(speechText.value);
@@ -49,3 +52,10 @@ document.addEventListener('click', (event) => {
     }
 })
 
+document.addEventListener('keydown', (event) => {
+    const key = event.which || event.keyCode;
+    if(key === 13) {
+        event.preventDefault();
+        handleSpeak();
+    }
+})

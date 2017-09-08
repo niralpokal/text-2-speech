@@ -1,23 +1,57 @@
 <html>
     <head>
+    <title>Text2Speech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="app.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div id="main">
-            <div> 
-                <label for="pitchSlide"> Pitch: </label>
-                <input id="pitchSlide" type="range" min="0" max="2" step=".1" value="1">
+        <div class="row">
+            <div class="">
+                <h1 class="center-align grey-text text-darken-3">
+                    Welcome to Text2Speech
+                </h1>
+                <p class="center-align grey-text text-darken-3">
+                    An app that uses the SpeechSynthesis API
+                </p>
             </div>
-            <div>
-                <label for="speedSlide"> Speed:</label>
-                <input id="speedSlide" type="range" min="0" max="10" step=".5" value="1">
-            </div>
-            <div>
-                <select id="voiceOptions">
-                </select>
-            </div>
-            <input id="speakText" type="text">
-            <input id="speakButton" type="button" value="Speak">
         </div>
+        <div id="main" class="card-panel hoverable">
+            <div class="row">
+                <div class="col s12 m10 l8 offset-m1 offset-l2">
+                    <p class="range-field"> 
+                        <label class="black-text text-darken-3" for="pitchSlide">Pitch:</label>
+                        <input id="pitchSlide" type="range" min="0" max="2" step=".1" value="1">
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m10 l8 offset-m1 offset-l2">
+                    <p clas="range-field">
+                        <label class="black-text text-darken-3" for="speedSlide"> Speed:</label>
+                        <input id="speedSlide" type="range" min="0" max="2" step=".1" value="1">
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m10 l8 offset-m1 offset-l2">
+                    <select id="voiceOptions"></select>
+                </div>
+            </div>
+            <div class="row">
+               <div class="input-field col s12 m10 l8 offset-m1 offset-l2"> 
+                    <input id="speakText" type="text" placeholder="Hello">
+                    <label for="speakText">Enter text</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m10 l8 offset-m1 offset-l2 center-align"> 
+                    <a id="speakButton" class="btn-large waves-effect waves-light blue">Speak</a>
+                <div>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script src="app.js" type="application/javascript"></script>
     </body>
 </html>

@@ -1,3 +1,4 @@
+$(document).ready(function () { return $('select').material_select(); });
 var getObj = function (id) { return document.getElementById(id); };
 var speed = getObj('speedSlide');
 var pitch = getObj('pitchSlide');
@@ -5,6 +6,7 @@ var voiceOptions = getObj('voiceOptions');
 var speechText = getObj('speakText');
 var speechButton = getObj('speakButton');
 var synth = window.speechSynthesis;
+var isChrome = (window.chrome && window.chrome.webstore);
 var populateList = function () {
     var appendList = function () {
         var voices = synth.getVoices();
@@ -16,7 +18,7 @@ var populateList = function () {
             voiceOptions.appendChild(option);
         }
     };
-    if (synth.onvoiceschanged) {
+    if (isChrome) {
         var getVoices = new Promise(function (done) { return synth.onvoiceschanged = done; });
         getVoices.then(function () { return appendList(); });
     }
@@ -26,6 +28,7 @@ var populateList = function () {
 };
 populateList();
 var handleSpeak = function () {
+    synth.cancel();
     var voices = synth.getVoices();
     var selectedOption = voiceOptions.selectedOptions[0].getAttribute('data-name');
     var utter = new SpeechSynthesisUtterance(speechText.value);
@@ -42,6 +45,13 @@ var handleSpeak = function () {
 };
 document.addEventListener('click', function (event) {
     if (event.target == speechButton) {
+        event.preventDefault();
+        handleSpeak();
+    }
+});
+document.addEventListener('keydown', function (event) {
+    var key = event.which || event.keyCode;
+    if (key === 13) {
         event.preventDefault();
         handleSpeak();
     }
