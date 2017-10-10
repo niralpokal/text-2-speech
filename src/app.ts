@@ -1,6 +1,8 @@
+interface Window { chrome?:{webstore: Boolean} }
+interface JQuery { material_select():void }
 
 $(document).ready(()=> $('select').material_select());
-let getObj= (id) => document.getElementById(id);
+const getObj= (id) => document.getElementById(id);
 const speed = <HTMLInputElement>getObj('speedSlide');
 const pitch = <HTMLInputElement>getObj('pitchSlide'); 
 const voiceOptions = <HTMLSelectElement>getObj('voiceOptions');
