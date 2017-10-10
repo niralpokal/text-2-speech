@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "./public/",
+        "lib":[
+            "es2016",
+            "dom"
+        ],
+        "noImplicitAny": false,
+        "target": "es2015"
+    }, 
+    "files": [
+        "./src/app.ts"
+    ]
+}
