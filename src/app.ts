@@ -11,7 +11,7 @@ const synth = window.speechSynthesis;
 const isChrome = (window.chrome && window.chrome.webstore);
 
 const populateList = () =>  {
-    const appendList = () =>{
+    const appendList = () => {
         const voices = synth.getVoices();
         for (let voice of voices) {
             let option = document.createElement('option');
@@ -45,8 +45,16 @@ const handleSpeak = () :void => {
         }
     }
     synth.speak(utter);
+    if (selectedOption && speechText.value) sendVoice(selectedOption, speechText.value);
 }
 
+const sendVoice = (voice: string, phrase: string):void => {
+    const payload = JSON.stringify({ voice, phrase })
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/text', true);
+    xhr.setRequestHeader('content-type', 'application/json');
+    xhr.send(payload);
+}
 document.addEventListener('click', (event) => {
     if (event.target == speechButton) {
         event.preventDefault();

@@ -40,6 +40,15 @@ const handleSpeak = () => {
         }
     }
     synth.speak(utter);
+    if (selectedOption && speechText.value)
+        sendVoice(selectedOption, speechText.value);
+};
+const sendVoice = (voice, phrase) => {
+    const payload = JSON.stringify({ voice, phrase });
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/text', true);
+    xhr.setRequestHeader('content-type', 'application/json');
+    xhr.send(payload);
 };
 document.addEventListener('click', (event) => {
     if (event.target == speechButton) {
