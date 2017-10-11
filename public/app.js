@@ -1,4 +1,3 @@
-$(document).ready(() => $('select').material_select());
 const getObj = (id) => document.getElementById(id);
 const speed = getObj('speedSlide');
 const pitch = getObj('pitchSlide');
@@ -7,15 +6,16 @@ const speechText = getObj('speakText');
 const speechButton = getObj('speakButton');
 const synth = window.speechSynthesis;
 const isChrome = (window.chrome && window.chrome.webstore);
-let populateList = () => {
-    let appendList = () => {
-        let voices = synth.getVoices();
+const populateList = () => {
+    const appendList = () => {
+        const voices = synth.getVoices();
         for (let voice of voices) {
             let option = document.createElement('option');
             option.textContent = `${voice.name} ${voice.lang} ${voice.default ? '-Default' : ''}`;
             option.setAttribute('data-name', voice.name);
             voiceOptions.appendChild(option);
         }
+        $('select').material_select();
     };
     if (isChrome) {
         const getVoices = new Promise(done => synth.onvoiceschanged = done);
@@ -26,7 +26,7 @@ let populateList = () => {
     }
 };
 populateList();
-let handleSpeak = () => {
+const handleSpeak = () => {
     synth.cancel();
     let voices = synth.getVoices();
     const selectedOption = voiceOptions.selectedOptions[0].getAttribute('data-name');
