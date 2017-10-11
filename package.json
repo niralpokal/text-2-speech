@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/jquery": "^3.2.13",
     "body-parser": "^1.18.2",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31"
   }
 }

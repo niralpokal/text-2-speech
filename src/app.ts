@@ -51,7 +51,7 @@ const handleSpeak = () :void => {
 const sendVoice = (voice: string, phrase: string):void => {
     const payload = JSON.stringify({ voice, phrase })
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/text', true);
+    xhr.open('POST', '/phrase', true);
     xhr.setRequestHeader('content-type', 'application/json');
     xhr.send(payload);
 }
